@@ -50,57 +50,13 @@ public class FXMLController {
 
     @FXML
     void corsiPerPeriodo(ActionEvent event) {
-    	txtRisultato.clear();
     	
-    	String pdString = txtPeriodo.getText();
-
-    	Integer pd;
-
-    	try {
-    		pd = Integer.parseInt(pdString);
-    	} catch (NumberFormatException e) {
-    		txtRisultato.setText("Devi inserire un numero (1 o 2)!");
-    		return;
-    	}
-    	
-    	if(!pd.equals(1) && !pd.equals(2)) {
-    		txtRisultato.setText("Devi inserire un numero (1 o 2)!");
-    		return;
-    	}
-    	
-    	//l'input è corretto
-    	List<Corso> corsi = this.model.getCorsiByPeriodo(pd);
-    	for(Corso c : corsi) {
-    		txtRisultato.appendText(c.toString() + "\n");
-    	}
 
     }
 
     @FXML
     void numeroStudenti(ActionEvent event) {
-    	txtRisultato.clear();
     	
-    	String pdString = txtPeriodo.getText();
-
-    	Integer pd;
-
-    	try {
-    		pd = Integer.parseInt(pdString);
-    	} catch (NumberFormatException e) {
-    		txtRisultato.setText("Devi inserire un numero (1 o 2)!");
-    		return;
-    	}
-    	
-    	if(!pd.equals(1) && !pd.equals(2)) {
-    		txtRisultato.setText("Devi inserire un numero (1 o 2)!");
-    		return;
-    	}
-    	
-    	Map<Corso, Integer> statistiche = this.model.getIscrittiByPeriodo(pd);
-    	
-    	for(Corso c : statistiche.keySet()) {
-    		txtRisultato.appendText(c.getNome() + " " + statistiche.get(c) + "\n");
-    	}
     }
 
     @FXML
