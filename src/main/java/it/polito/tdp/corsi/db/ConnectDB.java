@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-public class ConnectDB {
+public class ConnectDB { //TI VIENE GIA' FORNITA
 	private static final String jdbcURL = "jdbc:mysql://localhost/iscritticorsi";
 	private static HikariDataSource ds;
 	
