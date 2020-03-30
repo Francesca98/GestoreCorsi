@@ -1,8 +1,11 @@
 package it.polito.tdp.corsi;
 
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.corsi.model.Corso;
 import it.polito.tdp.corsi.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,12 +45,60 @@ public class FXMLController {
 
     @FXML
     void corsiPerPeriodo(ActionEvent event) {
+    	
+    	//txtRisultato.clear();
+    	String pdString = txtPeriodo.getText();
+    	int pd;
+    	try {
+    		pd = Integer.parseInt(pdString);
+    	}catch(NumberFormatException e)
+    	{
+    		txtRisultato.setText("Devi inserire un numero! 1 o 2!");
+    		return;
+    	}
+    	if(pd != 1 && pd!= 2)
+    		{
+    		txtRisultato.setText("Devi inserire un numero! 1 o 2!");
+    		return;}
+    		
+    	//l'input è coretto
+    
+    	List<Corso> corsi = this.model.getCorsiByPeriodo(pd);
+    	for (Corso c : corsi )
+    	{
+    		txtRisultato.appendText(c.toString()+"\n");
+    	}
+    		
+    	txtPeriodo.clear();
 
     }
 
     @FXML
     void numeroStudenti(ActionEvent event) {
 
+      	//txtRisultato.clear();
+    	String pdString = txtPeriodo.getText();
+    	int pd;
+    	try {
+    		pd = Integer.parseInt(pdString);
+    	}catch(NumberFormatException e)
+    	{
+    		txtRisultato.setText("Devi inserire un numero! 1 o 2!");
+    		return;
+    	}
+    	if(pd != 1 && pd!= 2)
+    		{
+    		txtRisultato.setText("Devi inserire un numero! 1 o 2!");
+    		return;}
+    		
+    	//l'input è coretto
+     Map<Corso, Integer> map = this.model.getIscrittiByPeriodo(pd);
+     for (Corso c : map.keySet())
+     {
+    	 txtRisultato.appendText(c.getNome()+ " " + map.get(c)+ " \n");
+     }
+     
+     txtPeriodo.clear();
     }
 
     @FXML

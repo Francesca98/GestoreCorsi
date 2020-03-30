@@ -44,10 +44,10 @@ public class CorsoDAO {
 	
 	public Map<Corso, Integer> getIscrittiByPeriodo (int pd)
 	{
-		String sql = "select c.codins, c.nome, c.crediti,COUNT(*) as tot" +
-	"from corso as c , iscrizione as i "+
-				"where  c.codins = i.codins and c.pd = ?"+
-				"group by c.codins, c.nome, c.crediti,c.pd";
+		String sql = "select c.codins, c.nome, c.crediti, c.pd, COUNT(*) as tot " + 
+				"from corso as c, iscrizione i " + 
+				"where c.codins = i.codins and c.pd = ? " + 
+				"group by c.codins, c.nome, c.crediti, c.pd ";
 		Map<Corso, Integer> map = new HashMap<>();
 		
 		try {
