@@ -7,5 +7,19 @@ import it.polito.tdp.corsi.db.CorsoDAO;
 
 public class Model {
 	
+	CorsoDAO dao;
+	public Model() {
+		dao = new CorsoDAO();
+	}
+	
+	public List<Corso> getCorsiByPeriodo(int pd){
+	
+		return dao.getCorsiByPeriodo(pd);
+	}
+	
+	public Map<Corso,Integer> getIscrittiByPeriodo(int pd){
+		
+		return dao.getIscrittiByPeriodo(pd);
+	}
 	
 }

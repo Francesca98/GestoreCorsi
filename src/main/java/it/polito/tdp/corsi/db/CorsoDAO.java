@@ -42,5 +42,36 @@ public class CorsoDAO {
 		return result;
 	}
 	
+	public Map<Corso, Integer> getIscrittiByPeriodo (int pd)
+	{
+		String sql = "select c.codins, c.nome, c.crediti,COUNT(*) as tot" +
+	"from corso as c , iscrizione as i "+
+				"where  c.codins = i.codins and c.pd = ?"+
+				"group by c.codins, c.nome, c.crediti,c.pd";
+		Map<Corso, Integer> map = new HashMap<>();
+		
+		try {
+			Connection conn = ConnectDB.getConnection(); 
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, pd);
+			ResultSet rs = st.executeQuery();
+			while(rs.next())
+			{
+				Corso c = new Corso(rs.getString("codins"), rs.getInt("crediti"), rs.getString("nome"), rs.getInt("pd"));
+				int num = rs.getInt("tot");
+				map.put(c, num);
+			}
+			conn.close();
+			
+		}catch (SQLException e)
+		{throw new RuntimeException(e);}
+
+		return map;
+		
+	}
+	
+	
+	
+	
 
 }
