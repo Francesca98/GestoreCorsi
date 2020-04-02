@@ -22,4 +22,20 @@ public class Model {
 		return dao.getIscrittiByPeriodo(pd);
 	}
 	
+	
+	public List<Studente> getStudentiByeCorso(Corso corso)
+	{
+		return dao.getStudentiByeCorso(corso);
+	}
+	
+	
+	public boolean esisteCorso(Corso corso)
+	{
+		return dao.esisteCorso(corso);
+	}
+	public Map <String, Integer> getDivisioneByeCorso(Corso corso)
+	{
+		return this.dao.getDivisioneByeCorso(corso);
+	}
+	
 }

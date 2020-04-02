@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import it.polito.tdp.corsi.model.Corso;
 import it.polito.tdp.corsi.model.Model;
+import it.polito.tdp.corsi.model.Studente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -95,7 +96,7 @@ public class FXMLController {
      Map<Corso, Integer> map = this.model.getIscrittiByPeriodo(pd);
      for (Corso c : map.keySet())
      {
-    	 txtRisultato.appendText(c.getNome()+ " " + map.get(c)+ " \n");
+    	 txtRisultato.appendText(c.getNome()+ ":   " + map.get(c)+ " \n");
      }
      
      txtPeriodo.clear();
@@ -103,12 +104,68 @@ public class FXMLController {
 
     @FXML
     void stampaDivisione(ActionEvent event) {
+    	txtRisultato.clear();
+    	String codins = txtCorso.getText();
+    	if(codins == null)
+    	{
+    		txtRisultato.setText("Inserire un codice corso!\n");
+    		return;
+    	}
+    	
+    	//CONTROLLARE CHE IL CORSO ESISTE NEL DATABASE
+   
+    	Corso corso = new Corso(codins, null, null, null);
+     	if(!this.model.esisteCorso(corso))
+     	{
+     		txtRisultato.setText("Corso inesistente nel database!\n");
+    		return;
+     	}
+    	Map <String, Integer> map = this.model.getDivisioneByeCorso(corso);
+    	for(String s : map.keySet())
+    	
+    	{
+//    		if(s.equals(""))
+//    		{		txtRisultato.appendText("Studenti non associati a nessun corso "+ map.get(s)+" \n");}
+//    		else
+//    		txtRisultato.appendText(s +" "+ map.get(s)+" \n");
+    		
+    		if(!s.equals(""))
+    		
+    		txtRisultato.appendText(s +" "+ map.get(s)+" \n");
+    	}
 
     }
 
     @FXML
     void stampaStudenti(ActionEvent event) {
+    	txtRisultato.clear();
+    	String codins = txtCorso.getText();
+    	if(codins == null)
+    	{
+    		txtRisultato.setText("Inserire un codice corso!\n");
+    		return;
+    	}
+    	
+    	//CONTROLLARE CHE IL CORSO ESISTE NEL DATABASE
+   
+    	Corso corso = new Corso(codins, null, null, null);
+     	if(!this.model.esisteCorso(corso))
+     	{
+     		txtRisultato.setText("Corso inesistente nel database!\n");
+    		return;
+     	}
 
+    	List <Studente> stud =  this.model.getStudentiByeCorso(corso);
+    	if(stud.size()==0)
+    	{
+    		txtRisultato.setText("Il corso non ha studenti iscritti!\n");
+    		
+    	return;
+    	}
+    	for(Studente s : stud )
+    	{
+    		txtRisultato.appendText(s.toString()+"\n");
+    	}
     }
 
     @FXML

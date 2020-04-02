@@ -7,8 +7,6 @@ public class TestModel {
 		System.out.println(model.getCorsiByPeriodo(1));
 		
 	System.out.println(model.getIscrittiByPeriodo(2));
-		
-
-	}
+		}
 
 }
